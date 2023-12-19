@@ -11,5 +11,5 @@ No escopo do Front-End:
 
 # Branding da Marca
 Como parte do desenvolvimento do Front-End, criamos o Manual da Marca uirapuru, segue link do documento abaixo:
- - [Manual da Marca](ManualdaMarca.pdf)
+ - [Manual da Marca](ManualDaMarca.pdf)
 
