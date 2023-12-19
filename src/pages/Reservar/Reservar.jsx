@@ -19,6 +19,7 @@ const Reservar = () => {
     const [criancas, setCriancas] = useState(0);
     const [tipoQuarto, setTipoQuarto] = useState("Selecione uma opção");
     const [avancar, setAvancar] = useState(false);
+    const [precoDiaria, setPrecoDiaria] = useState(0);
 
     /* Dados Segunda Etapa */
     const [hospedePrincipal, setHospedePrincipal] = useState([{}]);
@@ -33,12 +34,26 @@ const Reservar = () => {
             };
           })
         setOptions(ops);
-        console.log("Response: ", response);
     };
 
     useEffect(() => {
         getTiposQuartos();
+        setHospedePrincipal(JSON.parse(localStorage.getItem("Usuario")));
     }, []);
+
+    useEffect(() => {
+        switch(tipoQuarto){
+            case "NORMAL":
+                setPrecoDiaria(100);
+                break;
+            case "SUITE":
+                setPrecoDiaria(200);
+                break;
+            case "LUXO":
+                setPrecoDiaria(300);
+                break;
+        }
+    }, [tipoQuarto]);
 
     const handleCheckInChange = (date, dateString) => {
         setCheckIn(dateString);
@@ -67,19 +82,6 @@ const Reservar = () => {
         setAvancar(true);
     }
 
-    const handleHospedePrincipalChange = (e, i) => {
-        const { name, value } = e.target;
-        const campoHospedePrincipal = hospedePrincipal;
-
-        const objHospedePrincipal = [...campoHospedePrincipal];
-        objHospedePrincipal[i] = {
-            ...objHospedePrincipal[i],
-            [name]: value,
-        };
-        setHospedePrincipal(objHospedePrincipal);
-        console.log("hospedePrincipal: ", hospedePrincipal);
-    }
-
     const handleAcompanhantesChange = (e, i) => {
         const { name, value } = e.target;
         const campoAcompanhantes = [...acompanhantes];
@@ -90,7 +92,6 @@ const Reservar = () => {
             [name]: value,
         };
         setAcompanhantes(listaAcompanhantes);
-        console.log("acompanhantes: ", acompanhantes);
     }
 
     const renderHospedePrincipal = () => {
@@ -101,12 +102,14 @@ const Reservar = () => {
                     <Input
                         name="nome"
                         placeholder="Nome do hóspede"
-                        onChange={(e) => {handleHospedePrincipalChange(e, 0)}}
+                        value={hospedePrincipal.nome}
+                        disabled
                     />
                     <Input
                         name="documento"
+                        value={hospedePrincipal.documento.numeroDocumento}
                         placeholder="Documento do hóspede"
-                        onChange={(e) => {handleHospedePrincipalChange(e, 1)}}
+                        disabled
                     />
                 </div>
             </>
@@ -142,15 +145,21 @@ const Reservar = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         const reservation = {
+            hospedePrincipal,
             checkIn,
             checkOut,
-            adultos,
-            criancas,
             tipoQuarto,
-            hospedePrincipal,
             acompanhantes,
+            dataChegada: null,
+            dataSaida: null,
+            precoDiaria,
+            precoEstadia: 0,
+            ativa: false,
         };
+
+
         console.log("Reserva:", reservation);
     };
 
@@ -164,7 +173,6 @@ const Reservar = () => {
                 alert("Não há reservas cadastradas com esse email");
             }
         })
-        /* console.log("Response: ", response); */
       };
 
     return (
@@ -250,6 +258,11 @@ const Reservar = () => {
                                 <p>{tipoQuarto}</p>
                             </div>
 
+                            <div>
+                                <label>Preço Diaria</label>
+                                <p>{precoDiaria}</p>
+                            </div>
+
                         </div>
                         
                         {renderHospedePrincipal()}
@@ -258,7 +271,7 @@ const Reservar = () => {
                         
                         <button className={styles.botaoCinza} onClick={(e)=>{ changeStateAcancar(e, false) }}>Voltar</button>
 
-                        <BotaoLaranja text="Confirmar Reserva" />
+                        <BotaoLaranja text="Confirmar Reserva" onClick={handleSubmit} />
                     </>
                 ) }
             </form>
