@@ -10,7 +10,6 @@ import { request } from "../../utils/index";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [tipoUsuario, setTipoUsuario] = useState("");
   const navigateTo = useNavigate();
 
   const handleEmail = (e) => {
@@ -29,23 +28,21 @@ const Login = () => {
       return;
     }
 
-    const pessoa = await getLogin(email, senha);
-
-    console.log(pessoa);
-
-    /* navigateTo("/inicio"); */
+    if (await getLogin(email, senha)) {
+      navigateTo("/inicio");
+    }
   };
 
   const getLogin = async (email, senha) => {
     const response = await request("GET", `login/${email}/${senha}`);
-    
-    if (response) {
-        localStorage.setItem("Usuario", JSON.stringify(response));
-    }
 
-    console.log("Usuario", localStorage.getItem("Usuario"));
-    
-    setTipoUsuario(response.infoLogin.tipoLogin);
+    if (response) {
+      localStorage.setItem("Usuario", JSON.stringify(response));
+      return true;
+    } else {
+      alert("Email ou senha incorretos");
+      return false;
+    }
   };
 
   return (
