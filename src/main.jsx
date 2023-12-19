@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 
+import { changeBackground } from './utils/index'
 import './index.css';
 import Inicio from './pages/Inicio/Inicio'
 import Reservar from './pages/Reservar/Reservar'
