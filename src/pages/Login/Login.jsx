@@ -28,13 +28,12 @@ const Login = () => {
       alert("Digite seu email e senha");
       return;
     }
-    await getLogin(email, senha);
 
-    if (tipoUsuario === "ADMINISTRADOR") {
-      navigateTo("/sistema-administrador");
-    } else if (tipoUsuario === "FUNCIONARIO") {
-      navigateTo("/sistema-funcionario");
-    }
+    const pessoa = await getLogin(email, senha);
+
+    console.log(pessoa);
+
+    /* navigateTo("/inicio"); */
   };
 
   const getLogin = async (email, senha) => {
@@ -55,7 +54,6 @@ const Login = () => {
       <Input placeholder="Digite seu email" onChange={handleEmail} />
       <Input.Password placeholder="Digite sua senha" onChange={handleSenha} />
       <BotaoPadrao text="Acessar" onClick={login} />
-      <BotaoPadrao text="Voltar" link="/" />
       <Link to="/cadastro">
         Não possui conta ainda? <strong>Cadastrar</strong>
       </Link>

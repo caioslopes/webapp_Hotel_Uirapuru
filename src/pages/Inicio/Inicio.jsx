@@ -9,7 +9,6 @@ const Inicio = () =>{
             <img src={logo} alt="Logo Hotel" />
             <BotaoPadrao text="Reservar" link="/reservar" />
             <BotaoPadrao text="Consultar Reservas" link="/consultar" />
-            <BotaoPadrao text="Login" link="/login" />
         </div>
     )
 

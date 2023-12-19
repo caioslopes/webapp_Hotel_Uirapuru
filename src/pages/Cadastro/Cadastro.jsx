@@ -1,8 +1,12 @@
-import { DatePicker, Input, Select } from "antd";
-import styles from "./cadastro.module.css";
-import BotaoPadrao from "../../components/BotaoPadrao/BotaoPadrao";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { DatePicker, Input, Select } from "antd";
+
+
+import styles from "./cadastro.module.css";
+import BotaoPadrao from "../../components/BotaoPadrao/BotaoPadrao";
+import TopBar from "../../components/TopBar/TopBar";
+import { BotaoPreto } from "../../components/Botoes/Botoes";
 
 const Cadastro = () => {
   const [nome, setNome] = useState("");
@@ -87,10 +91,10 @@ const Cadastro = () => {
   };
   return (
     <>
-      <h1>Cadastro</h1>
+      <TopBar/>
+      <h1 className={styles.title}>Cadastro</h1>
       <form className={styles.formulario}>
-        <div>
-          <hr />
+        <div className={styles.dadosPessoais}>
           <h3>Documentacao</h3>
 
           <label htmlFor="nome">Nome</label>
@@ -156,8 +160,7 @@ const Cadastro = () => {
             onChange={(e) => setNacionalidade(e.target.value)}
           />
         </div>
-        <div>
-          <hr />
+        <div className={styles.dadosPessoais}>
           <h3>Endereco</h3>
 
           <label htmlFor="estado">Estado</label>
@@ -196,10 +199,9 @@ const Cadastro = () => {
             onChange={(e) => setBairro(e.target.value)}
           />
         </div>
-        <div>
-          <hr />
+        <div className={styles.dadosPessoais}>
 
-          <h3>Informcoes adicionais</h3>
+          <h3>Informações adicionais</h3>
 
           <label htmlFor="telefone">Telefone</label>
           <Input
@@ -224,6 +226,7 @@ const Cadastro = () => {
           />
         </div>
         <BotaoPadrao text="Cadastrar" onClick={handleCadastro} />
+        <BotaoPreto text="Inicio" link="/"/>
       </form>
     </>
   );
