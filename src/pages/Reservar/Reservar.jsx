@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styles from './reservar.module.css';
 import TopBar from '../../components/TopBar/TopBar';
 import { request } from "../../utils/index";
-import BotaoPadrao from "../../components/BotaoPadrao/BotaoPadrao";
+import { BotaoLaranja, BotaoPreto } from "../../components/Botoes/Botoes";
 
 const Reservar = () => {
 
@@ -96,17 +96,19 @@ const Reservar = () => {
     const renderHospedePrincipal = () => {
         return (
             <>
-                <label>Hospede Principal</label>
-                <Input
-                    name="nome"
-                    placeholder="Nome do hóspede"
-                    onChange={(e) => {handleHospedePrincipalChange(e, 0)}}
-                />
-                <Input
-                    name="documento"
-                    placeholder="Documento do hóspede"
-                    onChange={(e) => {handleHospedePrincipalChange(e, 1)}}
-                />
+                <div className={styles.dadosPessoais}>
+                    <label>Hospede Principal</label>
+                    <Input
+                        name="nome"
+                        placeholder="Nome do hóspede"
+                        onChange={(e) => {handleHospedePrincipalChange(e, 0)}}
+                    />
+                    <Input
+                        name="documento"
+                        placeholder="Documento do hóspede"
+                        onChange={(e) => {handleHospedePrincipalChange(e, 1)}}
+                    />
+                </div>
             </>
         )
     }
@@ -114,19 +116,21 @@ const Reservar = () => {
     const renderAcompanhantes = () => {
         return Array.from(Array((adultos - 1)+criancas).keys()).map((i) => (
             <>
-                <label>Acompanhantes</label>
-                <Input
-                    key={i+1}
-                    name={`nome_${i}`} 
-                    placeholder="Nome do hóspede"
-                    onChange={(e) => handleAcompanhantesChange(e, i)}
-                />
-                <Input
-                    key={i+2}
-                    name={`documento_${i}`}
-                    placeholder="Documento do hóspede"
-                    onChange={(e) => handleAcompanhantesChange(e, i)}
-                />
+                <div className={styles.dadosPessoais}>
+                    <label>Acompanhantes</label>
+                    <Input
+                        key={i+1}
+                        name={`nome_${i}`} 
+                        placeholder="Nome do hóspede"
+                        onChange={(e) => handleAcompanhantesChange(e, i)}
+                    />
+                    <Input
+                        key={i+2}
+                        name={`documento_${i}`}
+                        placeholder="Documento do hóspede"
+                        onChange={(e) => handleAcompanhantesChange(e, i)}
+                    />
+                </div>
             </>
         ))
     }
@@ -167,7 +171,7 @@ const Reservar = () => {
         <div>
             <TopBar/>
 
-            <h1 className={styles.title}>Reservar</h1>
+            <h1 className={styles.title}>{ !avancar ? "Reservar" : "Confirmar Sua Reserva" }</h1>
 
             <form className={styles.form}>
                 { !avancar ? (
@@ -206,47 +210,60 @@ const Reservar = () => {
                                 />
                             </div>
                         </div>
-                        <label>Tipo da Acomodação</label>
-                        <Select
-                            defaultValue="Selecione uma opção" 
-                            options={options}
-                            onChange={handleTipoQuartoChange}
-                            value={tipoQuarto}
-                        />
-                        <button onClick={(e)=>{ changeStateAcancar(e, true) }}>Avançar</button>
+                        <div className={styles.box__tipoAcomodacao}>
+                            <label>Tipo da Acomodação</label>
+                            <Select
+                                size="large"
+                                defaultValue="Selecione uma opção" 
+                                options={options}
+                                onChange={handleTipoQuartoChange}
+                                value={tipoQuarto}
+                            />
+                        </div>
+                        <button className={styles.botaoCinza} onClick={(e)=>{ changeStateAcancar(e, true) }}>Avançar</button>
                     </>
                 ) : (
                     <>
-                        <label>Confirme sua reserva</label>
-                        <div>
-                            <label>Check In</label>
-                            <p>{checkIn}</p>
+                        <div className={styles.box__segundaEtapa}>
+                            <div>
+                                <label>Check In</label>
+                                <p>{checkIn}</p>
+                            </div>
 
-                            <label>Check Out</label>
-                            <p>{checkOut}</p>
+                            <div>
+                                <label>Check Out</label>
+                                <p>{checkOut}</p>
+                            </div>
 
-                            <label>Adultos</label>
-                            <p>{adultos}</p>
+                            <div>
+                                <label>Adultos</label>
+                                <p>{adultos}</p>
+                            </div>
 
-                            <label>Crianças</label>
-                            <p>{criancas}</p>
+                            <div>
+                                <label>Crianças</label>
+                                <p>{criancas}</p>
+                            </div>
 
-                            <label>Tipo quarto</label>
-                            <p>{tipoQuarto}</p>
+                            <div>
+                                <label>Tipo quarto</label>
+                                <p>{tipoQuarto}</p>
+                            </div>
 
                         </div>
-                        <div>
-                            {renderHospedePrincipal()}
-                            
-                            {renderAcompanhantes()}
-                        </div>
-                        <button onClick={(e)=>{ changeStateAcancar(e, false) }}>Voltar</button>
-                        {/* <button onClick={handleSubmit}>Confirmar Reserva</button> */}
+                        
+                        {renderHospedePrincipal()}
+                        
+                        {renderAcompanhantes()}
+                        
+                        <button className={styles.botaoCinza} onClick={(e)=>{ changeStateAcancar(e, false) }}>Voltar</button>
+
+                        <BotaoLaranja text="Confirmar Reserva" />
                     </>
                 ) }
             </form>
             <br />
-            <BotaoPadrao text="Sair" link="/" />
+            <BotaoPreto text="Sair" link="/" />
         </div>
     )
 }
