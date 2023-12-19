@@ -2,6 +2,7 @@ import { DatePicker, Input, Select } from "antd";
 import styles from "./cadastro.module.css";
 import BotaoPadrao from "../../components/BotaoPadrao/BotaoPadrao";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Cadastro = () => {
   const [nome, setNome] = useState("");
@@ -19,6 +20,8 @@ const Cadastro = () => {
   const [telefone, setTelefone] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+
+  const navigateTo = useNavigate();
 
   const handleCadastro = () => {
     const dadosFormulario = {
@@ -57,9 +60,30 @@ const Cadastro = () => {
       body: JSON.stringify(dadosFormulario),
     };
 
-    fetch("http://localhost:8080/hotel/hospedes", requestOptions)
-      .then((response) => response.json())
-      .then((data) => console.log(data));
+    if (
+      nome === "" ||
+      nomePai === "" ||
+      nomeMae === "" ||
+      dataNascimento === null ||
+      nacionalidade === "" ||
+      tipoDocumento === "" ||
+      nDocumento === "" ||
+      estado === "" ||
+      cidade === "" ||
+      rua === "" ||
+      numeroRua === "" ||
+      bairro === "" ||
+      telefone === "" ||
+      email === "" ||
+      senha === ""
+    ) {
+      alert("Preencha todos os campos");
+      return;
+    } else {
+      fetch("http://localhost:8080/hotel/hospedes", requestOptions)
+        .then((response) => response.json())
+        .then(() => navigateTo("/"));
+    }
   };
   return (
     <>

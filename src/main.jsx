@@ -16,7 +16,7 @@ import Cadastro from './pages/Cadastro/Cadastro';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Cadastro/>,
+    element: <Login/>,
   },
   {
     path: "/reservar",
@@ -31,8 +31,8 @@ const router = createBrowserRouter([
     element: <MinhasReservas/>,
   },
   {
-    path: "/login",
-    element: <Login/>,
+    path: "/cadastro",
+    element: <Cadastro/>,
   },
   {
     path: "/sistema-funcionario",
