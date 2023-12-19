@@ -55,11 +55,20 @@ const Reservar = () => {
   }, [tipoQuarto]);
 
   const handleCheckInChange = (date, dateString) => {
-    setCheckIn(dateString);
+    const formattedDate = formatDateToISO(dateString);
+    setCheckIn(formattedDate);
   };
-
+  
   const handleCheckOutChange = (date, dateString) => {
-    setCheckOut(dateString);
+    const formattedDate = formatDateToISO(dateString);
+    setCheckOut(formattedDate);
+  };
+  
+  const formatDateToISO = (dateString) => {
+    const date = new Date(dateString);
+    const isoDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString();
+  
+    return isoDate;
   };
 
   const handleAdultsChange = (value) => {
