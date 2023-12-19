@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client'
 
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 
-import { changeBackground } from './utils/index'
 import './index.css';
 import Inicio from './pages/Inicio/Inicio'
 import Reservar from './pages/Reservar/Reservar'
@@ -17,7 +16,7 @@ import Cadastro from './pages/Cadastro/Cadastro';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Inicio/>,
+    element: <Cadastro/>,
   },
   {
     path: "/reservar",
@@ -44,8 +43,8 @@ const router = createBrowserRouter([
     element: <TelaInicialAdministrador/>
   },
   {
-    path: "/cadastro",
-    element: <Cadastro/>,
+    path: "/inicio",
+    element: <Inicio/>,
   },
 ]);
 

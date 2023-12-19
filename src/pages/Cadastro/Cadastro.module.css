@@ -1,0 +1,25 @@
+.formulario input {
+  margin-bottom: 1rem;
+    
+}
+
+.formulario h3 {
+  margin: 1rem 0;
+}
+
+.documentoContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.documentoContainer .inputDocumento {
+  width: 200px;
+}
+
+.dataNascimento {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
