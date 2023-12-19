@@ -1,8 +1,15 @@
-# React + Vite
+# Web aplicação Hotel Uirapuru
+O presente projeto, é extensão de um trabalho da faculdade - desenvolvimento de um software para um hotel fictício chamado Uirapuru.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Objetivo
+O objetivo desse projeto é a pratica e aprendizado de ferramentas utilizadas no mercado de trablaho.
 
-Currently, two official plugins are available:
+# Stack
+No escopo do Front-End:
+- Javascript Vanilla
+- React
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Branding da Marca
+Como parte do desenvolvimento do Front-End, criamos o Manual da Marca uirapuru, segue link do documento abaixo:
+ - [Manual da Marca](ManualdaMarca.pdf)
+
