@@ -25,14 +25,20 @@ const Reservar = () => {
     const [acompanhantes, setAcompanhantes] = useState([{}]);
 
     const getTiposQuartos = async () => {
-        const response = await request("GET", "tiposquartos");
-        setOptions(response);
+        const response = await request("GET", "tipoquarto");
+        const ops = response.map((option) => {
+            return {
+              value: option.tipoQuarto,
+              label: option.tipoQuarto,
+            };
+          })
+        setOptions(ops);
         console.log("Response: ", response);
     };
 
-    /* useEffect(() => {
+    useEffect(() => {
         getTiposQuartos();
-    }, []); */
+    }, []);
 
     const handleCheckInChange = (date, dateString) => {
         setCheckIn(dateString);
@@ -125,6 +131,11 @@ const Reservar = () => {
         ))
     }
 
+    const changeStateAcancar = (e, boolean) => {
+        e.preventDefault();
+        setAvancar(boolean);
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const reservation = {
@@ -161,53 +172,48 @@ const Reservar = () => {
             <form className={styles.form}>
                 { !avancar ? (
                     <>
-                        <label>Check In</label>
-                        <DatePicker
-                            onChange={handleCheckInChange} 
-                            value={checkIn}
-                        />
-                        <label>Check Out</label>
-                        <DatePicker 
-                            onChange={handleCheckOutChange} 
-                            value={checkOut}
-                        />
-                        <label>Adultos</label>
-                        <InputNumber 
-                            min={1} 
-                            max={3} 
-                            defaultValue={1}
-                            onChange={handleAdultsChange} 
-                            value={adultos}
-                        />
-                        <label>Crianças</label>
-                        <InputNumber
-                            min={0} 
-                            max={2} 
-                            defaultValue={0} 
-                            onChange={handleChildrenChange}
-                            value={criancas}
-                        />
-                        <label>Quartos</label>
+                        <div className={styles.box__primeiraEtapa}>
+                            <div>
+                                <label>Check In</label>
+                                <DatePicker
+                                    onChange={handleCheckInChange} 
+                                />
+                            </div>
+                            <div>
+                                <label>Check Out</label>
+                                <DatePicker 
+                                    onChange={handleCheckOutChange} 
+                                />
+                            </div>
+                            <div>
+                                <label>Adultos</label>
+                                <InputNumber 
+                                    min={1} 
+                                    max={3} 
+                                    defaultValue={1}
+                                    onChange={handleAdultsChange} 
+                                    value={adultos}
+                                />
+                            </div>
+                            <div>
+                                <label>Crianças</label>
+                                <InputNumber
+                                    min={0} 
+                                    max={2} 
+                                    defaultValue={0} 
+                                    onChange={handleChildrenChange}
+                                    value={criancas}
+                                />
+                            </div>
+                        </div>
+                        <label>Tipo da Acomodação</label>
                         <Select
                             defaultValue="Selecione uma opção" 
-                            options={[
-                                {
-                                value: 'jack',
-                                label: 'Jack',
-                                },
-                                {
-                                value: 'lucy',
-                                label: 'Lucy',
-                                },
-                                {
-                                value: 'Yiminghe',
-                                label: 'yiminghe',
-                                },
-                            ]}
+                            options={options}
                             onChange={handleTipoQuartoChange}
                             value={tipoQuarto}
                         />
-                        <button onClick={()=>{ setAvancar(true)}}>Avançar</button>
+                        <button onClick={(e)=>{ changeStateAcancar(e, true) }}>Avançar</button>
                     </>
                 ) : (
                     <>
@@ -234,11 +240,12 @@ const Reservar = () => {
                             
                             {renderAcompanhantes()}
                         </div>
-                        <button onClick={()=>{ setAvancar(false)}}>Voltar</button>
-                        <button onClick={handleSubmit}>Confirmar Reserva</button>
+                        <button onClick={(e)=>{ changeStateAcancar(e, false) }}>Voltar</button>
+                        {/* <button onClick={handleSubmit}>Confirmar Reserva</button> */}
                     </>
                 ) }
             </form>
+            <br />
             <BotaoPadrao text="Sair" link="/" />
         </div>
     )

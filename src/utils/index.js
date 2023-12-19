@@ -14,4 +14,11 @@ async function request(method, endpoint) {
   return data;
 }
 
-export { request };
+function changeBackground(){
+  let body = document.querySelector('body');
+  body.style.background = "";
+  const url = window.location.href;
+  console.log(url);
+}
+
+export { request, changeBackground };
