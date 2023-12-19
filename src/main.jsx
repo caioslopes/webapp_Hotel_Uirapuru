@@ -11,6 +11,7 @@ import Consultar from './pages/Consultar/Consultar';
 import MinhasReservas from './pages/MinhasReservas/MinhasReservas';
 import TelaInicialFuncionario from './pages/SistemaFuncionario/TelaInicialFuncionario';
 import TelaInicialAdministrador from './pages/SistemaAdministrador/TelaInicialAdministrador';
+import Cadastro from './pages/Cadastro/Cadastro';
 
 const router = createBrowserRouter([
   {
@@ -40,7 +41,11 @@ const router = createBrowserRouter([
   {
     path: "/sistema-administrador",
     element: <TelaInicialAdministrador/>
-  }
+  },
+  {
+    path: "/cadastro",
+    element: <Cadastro/>,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
