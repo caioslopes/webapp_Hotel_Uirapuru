@@ -39,7 +39,14 @@ const Login = () => {
 
   const getLogin = async (email, senha) => {
     const response = await request("GET", `login/${email}/${senha}`);
-    setTipoUsuario(response);
+    
+    if (response) {
+        localStorage.setItem("Usuario", JSON.stringify(response));
+    }
+
+    console.log("Usuario", localStorage.getItem("Usuario"));
+    
+    setTipoUsuario(response.infoLogin.tipoLogin);
   };
 
   return (
