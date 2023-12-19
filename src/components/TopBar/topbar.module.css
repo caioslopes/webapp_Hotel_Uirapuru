@@ -1,0 +1,10 @@
+.topBar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+}
+
+.topBar img{
+    width: 100px;
+}

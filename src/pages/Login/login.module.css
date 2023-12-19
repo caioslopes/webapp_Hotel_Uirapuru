@@ -1,0 +1,19 @@
+.inicio{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+}
+
+.inicio input{
+    height: 50px;
+    border-radius: 30px!important;
+}
+
+.inicio span{
+    border-radius: 30px!important;
+}
