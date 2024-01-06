@@ -2,7 +2,7 @@
 O presente projeto, é extensão de um trabalho da faculdade - desenvolvimento de um software para um hotel fictício chamado Uirapuru.
 
 # Objetivo
-O objetivo desse projeto é a pratica e aprendizado de ferramentas utilizadas no mercado de trablaho.
+O objetivo desse projeto é a pratica e aprendizado de ferramentas utilizadas no mercado de trabalho.
 
 # Stack
 No escopo do Front-End:
